@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Tanja-R/git-version-control-project/issues"
   },
-  "homepage": "https://github.com/Tanja-R/git-version-control-project#readme"
+  "homepage": "https://github.com/Tanja-R/git-version-control-project#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
