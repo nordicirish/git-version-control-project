@@ -8,3 +8,6 @@ A two player tic-tac-toe game app created with node.js.
 * Juuso Hauvala
 * Roger Graham
 
+## App installation instructions
+
+Instructions go here...
