@@ -18,6 +18,8 @@ console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 position = getPosition(player1);
 console.log("You chose position: " + position);
 
+// Asks the player to choose a position where to play.
+// Returns an integer between 1 and 9.
 function getPosition(player) {
     let input = readlineSync.questionInt(
     player + ", please give a position (1-9): ");
