@@ -14,3 +14,19 @@ var nextMark = "X";
 //player2 = readlineSync.question("Give the name for player 1: ");
 
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
+
+position = getPosition(player1);
+console.log("You chose position: " + position);
+
+function getPosition(player) {
+    let input = readlineSync.questionInt(
+    player + ", please give a position (1-9): ");
+
+    // The input is supposed to be between 1 and 9.
+    if (input < 1 || input > 9) {
+        console.log("The position should be from 1 to 9. Please, try again.");
+        return getPosition(player);
+    } else {
+        return input;
+    }
+}
