@@ -22,9 +22,13 @@ var board = [
 
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
+for(let i = 0; i < 3; i++) {
+    displayBoard(board);
+    position = getPosition(player1);
+    console.log("You chose position: " + position);
+    console.log(markPosition(position, nextMark));
+}
 displayBoard(board);
-position = getPosition(player1);
-console.log("You chose position: " + position);
 
 // Prints the tic-tac-toe board to the screen.
 function displayBoard(board) {
