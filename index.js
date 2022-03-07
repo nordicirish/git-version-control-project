@@ -33,7 +33,7 @@ function displayBoard(board) {
     console.log(
       "| " + board[i][0] + " | " + board[i][1] + " | " + board[i][2] + " |"
     );
-    if (i < 2) console.log(".---.---.---.");
+    if (i < 2) console.log("|---|---|---|");
     else console.log("`-----------´");
   }
 }
