@@ -18,24 +18,38 @@ var board = [
 
 //These can be used, if we want to ask the names for the players.
 //player1 = readlineSync.question("Give the name for player 1: ");
-//player2 = readlineSync.question("Give the name for player 1: ");
+//player2 = readlineSync.question("Give the name for player 2: ");
 
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
+displayBoard(board);
 position = getPosition(player1);
 console.log("You chose position: " + position);
+
+// Prints the tic-tac-toe board to the screen.
+function displayBoard(board) {
+  console.log(".-----------.");
+  for (var i = 0; i < 3; i++) {
+    console.log(
+      "| " + board[i][0] + " | " + board[i][1] + " | " + board[i][2] + " |"
+    );
+    if (i < 2) console.log("|---|---|---|");
+    else console.log("`-----------´");
+  }
+}
 
 // Asks the player to choose a position where to play.
 // Returns an integer between 1 and 9.
 function getPosition(player) {
-    let input = readlineSync.questionInt(
-    player + ", please give a position (1-9): ");
+  let input = readlineSync.questionInt(
+    player + ", please give a position (1-9): "
+  );
 
-    // The input is supposed to be between 1 and 9.
-    if (input < 1 || input > 9) {
-        console.log("The position should be from 1 to 9. Please, try again.");
-        return getPosition(player);
-    } else {
-        return input;
-    }
+  // The input is supposed to be between 1 and 9.
+  if (input < 1 || input > 9) {
+    console.log("The position should be from 1 to 9. Please, try again.");
+    return getPosition(player);
+  } else {
+    return input;
+  }
 }
