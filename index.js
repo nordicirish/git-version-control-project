@@ -24,9 +24,21 @@ console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
 for(let i = 0; i < 3; i++) {
     displayBoard(board);
-    position = getPosition(player1);
+    // Choose the player by checking the nextMark
+    if (nextMark == "X") {
+        position = getPosition(player1);
+    } else {
+        position = getPosition(player2);
+    }
     console.log("You chose position: " + position);
     console.log(markPosition(position, nextMark));
+    // Change the turn by changing the nextMark
+    if ( nextMark == "X") {
+        nextMark = "0";
+    }
+    else {
+        nextMark = "X";
+    }
 }
 displayBoard(board);
 
