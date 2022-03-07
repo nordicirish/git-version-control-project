@@ -53,3 +53,58 @@ function getPosition(player) {
     return input;
   }
 }
+
+// Function puts a mark on a position, if it is available.
+// Returns true, if succeeded. Otherwise, it returns false.
+function markPosition(pos, mark) {
+    switch (pos) {
+        case 1:
+            //checking that the position isn't reserved.
+            if(board[0][0] == " ") {
+                board[0][0] = mark;
+                return true;
+            }
+        case 2:
+            if(board[0][1] == " ") {
+                board[0][1] = mark;
+                return true;
+            }
+        case 3:
+            if(board[0][2] == " ") {
+                board[0][2] = mark;
+                return true;
+            }
+        case 4:
+            if(board[1][0] == " ") {
+                board[1][0] = mark;
+                return true;
+            }
+        case 5:
+            if(board[1][1] == " ") {
+                board[1][1] = mark;
+                return true;
+            }
+        case 6:
+            if(board[1][2] == " ") {
+                board[1][2] = mark;
+                return true;
+            }
+        case 7:
+            if(board[2][0] == " ") {
+                board[2][0] = mark;
+                return true;
+            }
+        case 8:
+            if(board[2][1] == " ") {
+                board[2][1] = mark;
+                return true;
+            }
+        case 9:
+            if(board[2][2] == " ") {
+                board[2][2] = mark;
+                return true;
+            }
+        default:
+            return false;
+    }
+}
