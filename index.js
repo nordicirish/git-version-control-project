@@ -120,4 +120,6 @@ function markPosition(pos, mark) {
         default:
             return false;
     }
+    //If true wasn't returned in the switch block.
+    return false;
 }
