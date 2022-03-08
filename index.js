@@ -37,14 +37,18 @@ displayBoard(board);
 // calls getPosition() and markPosition() until a position is marked.
 function playTurn(mark) {
     displayBoard(board);
-    // Choose the player by checking the nextMark
-    if (nextMark == "X") {
-        position = getPosition(player1);
-    } else {
-        position = getPosition(player2);
+    let notMarked = true;
+    while (notMarked) {
+        // Choose the player by checking the nextMark
+        if (nextMark == "X") {
+            position = getPosition(player1);
+        } else {
+            position = getPosition(player2);
+        }
+        console.log("You chose position: " + position);
+        notMarked = !markPosition(position, mark);
+        console.log(notMarked);
     }
-    console.log("You chose position: " + position);
-    console.log(markPosition(position, nextMark));
 }
 
 // Prints the tic-tac-toe board to the screen.
