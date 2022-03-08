@@ -29,9 +29,9 @@ while (gameGoing) {
   if (checkWinner(nextMark, board)) {
     // if there is one line with three same marks, end the game and declare the winner.
     if (nextMark == "X") {
-      console.log("Game Over!" + player1 + " wins!");
+      console.log("Game Over! " + player1 + " wins!");
     } else {
-      console.log("Game Over!" + player2 + " wins!");
+      console.log("Game Over! " + player2 + " wins!");
     }
     gameGoing = false; // to leave the loop if game ends before it.
   } else {
