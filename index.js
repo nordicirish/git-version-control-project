@@ -37,7 +37,7 @@ while (gameGoing) {
   } else {
     if (isBoardFull()) {
       // If the board is full, the game automatically ends.
-      console.log("Game Over! The board is full!");
+      console.log("Game Over! The board is full! It's a draw.");
       gameGoing = false;
     } else {
       // If the board is not full and the game has not ended yet,
