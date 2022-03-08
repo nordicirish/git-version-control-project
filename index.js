@@ -22,11 +22,22 @@ console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
 for (let i = 0; i < 3; i++) {
   playTurn(nextMark);
-  // Change the turn by changing the nextMark
-  if (nextMark == "X") {
-    nextMark = "0";
+
+  if (checkRow(nextMark, board)) {
+    // if there is one line with three same marks, end the game and declare the winner.
+    if (nextMark == "X") {
+      console.log("Game Over!" + player1 + " wins!");
+    } else {
+      console.log("Game Over!" + player2 + " wins!");
+    }
+    i = 3; // to leave the loop if game ends before it.
   } else {
-    nextMark = "X";
+    // If the game has not ended yet, change the turn by changing the nextMark
+    if (nextMark == "X") {
+      nextMark = "0";
+    } else {
+      nextMark = "X";
+    }
   }
 }
 displayBoard(board);
