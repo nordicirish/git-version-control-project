@@ -35,7 +35,7 @@ while (gameGoing) {
     }
     gameGoing = false; // to leave the loop if game ends before it.
   } else {
-    if (isBoardFull) {
+    if (isBoardFull()) {
       // If the board is full, the game automatically ends.
       console.log("Game Over! The board is full!");
       gameGoing = false;
@@ -218,9 +218,9 @@ function isBoardFull() {
   // Let's assume the board is full.
   let returnValue = true;
   // The board is not full, if any row has an empty element.
-  for (row in board) {
-    for (elem in row) {
-      if (elem == " ") {
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] == " ") {
         returnValue = false;
       }
     }
