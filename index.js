@@ -35,7 +35,7 @@ while (gameGoing) {
     }
     gameGoing = false; // to leave the loop if game ends before it.
   } else {
-    if (isBoardFull) {
+    if (isBoardFull()) {
       // If the board is full, the game automatically ends.
       console.log("Game Over! The board is full!");
       gameGoing = false;
