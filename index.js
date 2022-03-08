@@ -199,3 +199,21 @@ function checkRow(mark, board) {
   // return "false" is there are no three same mark at same line.
   return false;
 }
+
+// Checks if the Board is already full.
+// Returns false, if there is at least one empty position.
+// Otherwise returns true.
+// CAUTION: hasn't been tested.
+function isBoardFull() {
+    // Let's assume the board is full.
+    let returnValue = true;
+    // The board is not full, if any row has an empty element.
+    for (row in board) {
+        for (elem in row) {
+            if (elem == " ") {
+                returnValue = false;
+            }
+        }
+    }
+    return returnValue;
+}
