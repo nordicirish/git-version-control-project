@@ -42,6 +42,11 @@ for(let i = 0; i < 3; i++) {
 }
 displayBoard(board);
 
+// calls getPosition() and markPosition() until a position is marked.
+function playTurn(mark) {
+
+}
+
 // Prints the tic-tac-toe board to the screen.
 function displayBoard(board) {
   console.log(".-----------.");
