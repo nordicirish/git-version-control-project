@@ -25,32 +25,45 @@ console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
 while (gameGoing) {
   playTurn(nextMark);
+  gameGoing = checkEnd(nextMark, board);
+  if(gameGoing) {
+    // change the turn by changing the nextMark.
+    nextMark = changeMark(nextMark);
+  }
+}
 
-  if (checkWinner(nextMark, board)) {
+// Check if one of the players has won or if it is a draw.
+// Returns true, if the game continues. False, if it has ended.
+function checkEnd(mark, board) {
+  if (checkWinner(mark, board)) {
+    displayBoard(board);
     // if there is one line with three same marks, end the game and declare the winner.
-    if (nextMark == "X") {
+    if (mark == "X") {
       console.log("Game Over! " + player1 + " wins!");
     } else {
       console.log("Game Over! " + player2 + " wins!");
     }
-    gameGoing = false; // to leave the loop if game ends before it.
+    return false; // to end the game if there is a winner.
   } else {
-    if (isBoardFull()) {
-      // If the board is full, the game automatically ends.
+    if (isBoardFull(board)) {
+      // If the board is full but there is no winner, the game automatically ends.
+      displayBoard(board);
       console.log("Game Over! The board is full! It's a draw.");
-      gameGoing = false;
+      return false; // to end the game as a draw.
     } else {
-      // If the board is not full and the game has not ended yet,
-      // change the turn by changing the nextMark.
-      if (nextMark == "X") {
-        nextMark = "0";
-      } else {
-        nextMark = "X";
-      }
+      // If the game has not ended by one player winning or as a draw.
+      return true;
     }
   }
 }
-displayBoard(board);
+
+function changeMark(mark) {
+  if (mark == "X") {
+    return "0";
+  } else {
+    return "X";
+  }
+}
 
 // calls getPosition() and markPosition() until a position is marked.
 function playTurn(mark) {
@@ -213,7 +226,7 @@ function checkWinner(mark, board) {
 // Checks if the Board is already full.
 // Returns false, if there is at least one empty position.
 // Otherwise returns true.
-function isBoardFull() {
+function isBoardFull(board) {
   // Let's assume the board is full.
   let returnValue = true;
   // The board is not full, if any row has an empty element.
