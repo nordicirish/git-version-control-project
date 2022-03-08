@@ -1,72 +1,84 @@
-var readlineSync = require("readline-sync");
+const readlineSync = require("readline-sync");
 
-var player1 = "Player 1";
-var player2 = "Player 2";
+playGame();
 
-// nextMark is either "X" or "0". It tells which mark will be placed
-// to the board next. It can also tell whose turn it is.
-var nextMark = "X";
-// The board is an array which consists of three arrays (=rows).
-// Each inner array has three elements - one for each column.
-var board = [
-  [" ", " ", " "],
-  [" ", " ", " "],
-  [" ", " ", " "],
-];
+function playGame() {
+  // nextMark is either "X" or "0". It tells which mark will be placed
+  // to the board next. It can also tell whose turn it is.
+  let nextMark = "X";
+  // The board is an array which consists of three arrays (=rows).
+  // Each inner array has three elements - one for each column.
+  var board = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "],
+  ];
+  // This variable remains "true" as long as game is not over.
+  let gameGoing = true;
+  let player1 = "Player 1";
+  let player2 = "Player 2";
+  player1 = readlineSync.question("Give the name for player 1: ");
+  player2 = readlineSync.question("Give the name for player 2: ");
 
-// This variable remains "true" as long as game is not over.
-var gameGoing = true;
-
-//These can be used, if we want to ask the names for the players.
-//player1 = readlineSync.question("Give the name for player 1: ");
-//player2 = readlineSync.question("Give the name for player 2: ");
-
-console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
-
-while (gameGoing) {
-  playTurn(nextMark);
-
-  if (checkWinner(nextMark, board)) {
-    // if there is one line with three same marks, end the game and declare the winner.
-    if (nextMark == "X") {
-      console.log("Game Over!" + player1 + " wins!");
-    } else {
-      console.log("Game Over!" + player2 + " wins!");
-    }
-    gameGoing = false; // to leave the loop if game ends before it.
-  } else {
-    if (isBoardFull()) {
-      // If the board is full, the game automatically ends.
-      console.log("Game Over! The board is full!");
-      gameGoing = false;
-    } else {
-      // If the board is not full and the game has not ended yet,
+  console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
+  while (gameGoing) {
+    playTurn(nextMark, board, player1, player2);
+    gameGoing = checkEnd(nextMark, board, player1, player2);
+    if(gameGoing) {
       // change the turn by changing the nextMark.
-      if (nextMark == "X") {
-        nextMark = "0";
-      } else {
-        nextMark = "X";
-      }
+      nextMark = changeMark(nextMark);
     }
   }
 }
-displayBoard(board);
+
+// Check if one of the players has won or if it is a draw.
+// Returns true, if the game continues. False, if it has ended.
+function checkEnd(mark, board, player1, player2) {
+  if (checkWinner(mark, board)) {
+    displayBoard(board);
+    // if there is one line with three same marks, end the game and declare the winner.
+    if (mark == "X") {
+      console.log("Game Over! " + player1 + " wins!");
+    } else {
+      console.log("Game Over! " + player2 + " wins!");
+    }
+    return false; // to end the game if there is a winner.
+  } else {
+    if (isBoardFull(board)) {
+      // If the board is full but there is no winner, the game automatically ends.
+      displayBoard(board);
+      console.log("Game Over! The board is full! It's a draw.");
+      return false; // to end the game as a draw.
+    } else {
+      // If the game has not ended by one player winning or as a draw.
+      return true;
+    }
+  }
+}
+
+function changeMark(mark) {
+  if (mark == "X") {
+    return "0";
+  } else {
+    return "X";
+  }
+}
 
 // calls getPosition() and markPosition() until a position is marked.
-function playTurn(mark) {
+function playTurn(mark, board, player1, player2) {
   displayBoard(board);
   let notMarked = true;
   while (notMarked) {
     // position tells where the player wants to play.
     let position;
     // Choose the player by checking the nextMark
-    if (nextMark == "X") {
+    if (mark == "X") {
       position = getPosition(player1);
     } else {
       position = getPosition(player2);
     }
     console.log("You chose position: " + position);
-    notMarked = !markPosition(position, mark);
+    notMarked = !markPosition(position, mark, board);
     if (notMarked) {
       console.log("The position " + position + " is not available. Try again.");
     }
@@ -103,7 +115,7 @@ function getPosition(player) {
 
 // Function puts a mark on a position, if it is available.
 // Returns true, if succeeded. Otherwise, it returns false.
-function markPosition(pos, mark) {
+function markPosition(pos, mark, board) {
   switch (pos) {
     case 1:
       //checking that the position isn't reserved.
@@ -213,8 +225,7 @@ function checkWinner(mark, board) {
 // Checks if the Board is already full.
 // Returns false, if there is at least one empty position.
 // Otherwise returns true.
-// CAUTION: hasn't been tested.
-function isBoardFull() {
+function isBoardFull(board) {
   // Let's assume the board is full.
   let returnValue = true;
   // The board is not full, if any row has an empty element.
