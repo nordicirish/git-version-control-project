@@ -9,7 +9,9 @@ A two player tic-tac-toe game app created with node.js.
 * Roger Graham
 
 ## Releases
-release/1.1.0 08/03/2022 
+
+release/1.1.0 08/03/2022
+ 
 release/1.0.0 04/03/2022 
 
 ## App installation instructions
