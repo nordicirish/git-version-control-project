@@ -23,7 +23,7 @@ var board = [
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
 for(let i = 0; i < 3; i++) {
-
+    playTurn(nextMark);
     // Change the turn by changing the nextMark
     if ( nextMark == "X") {
         nextMark = "0";
