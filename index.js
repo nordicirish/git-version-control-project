@@ -1,40 +1,39 @@
 const readlineSync = require("readline-sync");
 
-var player1 = "Player 1";
-var player2 = "Player 2";
+playGame();
 
-// nextMark is either "X" or "0". It tells which mark will be placed
-// to the board next. It can also tell whose turn it is.
-var nextMark = "X";
-// The board is an array which consists of three arrays (=rows).
-// Each inner array has three elements - one for each column.
-var board = [
-  [" ", " ", " "],
-  [" ", " ", " "],
-  [" ", " ", " "],
-];
+function playGame() {
+  // nextMark is either "X" or "0". It tells which mark will be placed
+  // to the board next. It can also tell whose turn it is.
+  let nextMark = "X";
+  // The board is an array which consists of three arrays (=rows).
+  // Each inner array has three elements - one for each column.
+  var board = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "],
+  ];
+  // This variable remains "true" as long as game is not over.
+  let gameGoing = true;
+  let player1 = "Player 1";
+  let player2 = "Player 2";
+  player1 = readlineSync.question("Give the name for player 1: ");
+  player2 = readlineSync.question("Give the name for player 2: ");
 
-// This variable remains "true" as long as game is not over.
-var gameGoing = true;
-
-//These can be used, if we want to ask the names for the players.
-//player1 = readlineSync.question("Give the name for player 1: ");
-//player2 = readlineSync.question("Give the name for player 2: ");
-
-console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
-
-while (gameGoing) {
-  playTurn(nextMark);
-  gameGoing = checkEnd(nextMark, board);
-  if(gameGoing) {
-    // change the turn by changing the nextMark.
-    nextMark = changeMark(nextMark);
+  console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
+  while (gameGoing) {
+    playTurn(nextMark, board, player1, player2);
+    gameGoing = checkEnd(nextMark, board, player1, player2);
+    if(gameGoing) {
+      // change the turn by changing the nextMark.
+      nextMark = changeMark(nextMark);
+    }
   }
 }
 
 // Check if one of the players has won or if it is a draw.
 // Returns true, if the game continues. False, if it has ended.
-function checkEnd(mark, board) {
+function checkEnd(mark, board, player1, player2) {
   if (checkWinner(mark, board)) {
     displayBoard(board);
     // if there is one line with three same marks, end the game and declare the winner.
@@ -66,20 +65,20 @@ function changeMark(mark) {
 }
 
 // calls getPosition() and markPosition() until a position is marked.
-function playTurn(mark) {
+function playTurn(mark, board, player1, player2) {
   displayBoard(board);
   let notMarked = true;
   while (notMarked) {
     // position tells where the player wants to play.
     let position;
     // Choose the player by checking the nextMark
-    if (nextMark == "X") {
+    if (mark == "X") {
       position = getPosition(player1);
     } else {
       position = getPosition(player2);
     }
     console.log("You chose position: " + position);
-    notMarked = !markPosition(position, mark);
+    notMarked = !markPosition(position, mark, board);
     if (notMarked) {
       console.log("The position " + position + " is not available. Try again.");
     }
@@ -116,7 +115,7 @@ function getPosition(player) {
 
 // Function puts a mark on a position, if it is available.
 // Returns true, if succeeded. Otherwise, it returns false.
-function markPosition(pos, mark) {
+function markPosition(pos, mark, board) {
   switch (pos) {
     case 1:
       //checking that the position isn't reserved.
