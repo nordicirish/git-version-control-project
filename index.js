@@ -47,7 +47,10 @@ function playTurn(mark) {
         }
         console.log("You chose position: " + position);
         notMarked = !markPosition(position, mark);
-        console.log(notMarked);
+        if(notMarked) {
+            console.log("The position " + position +
+             " is not available. Try again.");
+        }
     }
 }
 
