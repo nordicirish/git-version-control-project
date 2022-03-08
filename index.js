@@ -213,7 +213,6 @@ function checkWinner(mark, board) {
 // Checks if the Board is already full.
 // Returns false, if there is at least one empty position.
 // Otherwise returns true.
-// CAUTION: hasn't been tested.
 function isBoardFull() {
   // Let's assume the board is full.
   let returnValue = true;
