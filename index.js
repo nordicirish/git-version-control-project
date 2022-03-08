@@ -1,4 +1,4 @@
-var readlineSync = require("readline-sync");
+const readlineSync = require("readline-sync");
 
 var player1 = "Player 1";
 var player2 = "Player 2";
