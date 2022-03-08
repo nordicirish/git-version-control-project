@@ -14,29 +14,39 @@ var board = [
   [" ", " ", " "],
 ];
 
+// This variable remains "true" as long as game is not over.
+var gameGoing = true;
+
 //These can be used, if we want to ask the names for the players.
 //player1 = readlineSync.question("Give the name for player 1: ");
 //player2 = readlineSync.question("Give the name for player 2: ");
 
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
-for (let i = 0; i < 3; i++) {
+while (gameGoing) {
   playTurn(nextMark);
 
-  if (checkRow(nextMark, board)) {
+  if (checkWinner(nextMark, board)) {
     // if there is one line with three same marks, end the game and declare the winner.
     if (nextMark == "X") {
       console.log("Game Over!" + player1 + " wins!");
     } else {
       console.log("Game Over!" + player2 + " wins!");
     }
-    i = 3; // to leave the loop if game ends before it.
+    gameGoing = false; // to leave the loop if game ends before it.
   } else {
-    // If the game has not ended yet, change the turn by changing the nextMark
-    if (nextMark == "X") {
-      nextMark = "0";
+    if (isBoardFull()) {
+      // If the board is full, the game automatically ends.
+      console.log("Game Over! The board is full!");
+      gameGoing = false;
     } else {
-      nextMark = "X";
+      // If the board is not full and the game has not ended yet,
+      // change the turn by changing the nextMark.
+      if (nextMark == "X") {
+        nextMark = "0";
+      } else {
+        nextMark = "X";
+      }
     }
   }
 }
@@ -158,7 +168,7 @@ function markPosition(pos, mark) {
 }
 
 // Function checks if there is three same marks in one row, column or diagonal line.
-function checkRow(mark, board) {
+function checkWinner(mark, board) {
   // Checking rows
   for (var i = 0; i < 3; i++) {
     if (
@@ -198,4 +208,22 @@ function checkRow(mark, board) {
 
   // return "false" is there are no three same mark at same line.
   return false;
+}
+
+// Checks if the Board is already full.
+// Returns false, if there is at least one empty position.
+// Otherwise returns true.
+// CAUTION: hasn't been tested.
+function isBoardFull() {
+  // Let's assume the board is full.
+  let returnValue = true;
+  // The board is not full, if any row has an empty element.
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] == " ") {
+        returnValue = false;
+      }
+    }
+  }
+  return returnValue;
 }
