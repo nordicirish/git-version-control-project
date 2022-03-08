@@ -3,8 +3,6 @@ var readlineSync = require("readline-sync");
 var player1 = "Player 1";
 var player2 = "Player 2";
 
-// position tells where the player wants to play.
-var position = "0";
 // nextMark is either "X" or "0". It tells which mark will be placed
 // to the board next. It can also tell whose turn it is.
 var nextMark = "X";
@@ -23,15 +21,7 @@ var board = [
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
 for(let i = 0; i < 3; i++) {
-    displayBoard(board);
-    // Choose the player by checking the nextMark
-    if (nextMark == "X") {
-        position = getPosition(player1);
-    } else {
-        position = getPosition(player2);
-    }
-    console.log("You chose position: " + position);
-    console.log(markPosition(position, nextMark));
+    playTurn(nextMark);
     // Change the turn by changing the nextMark
     if ( nextMark == "X") {
         nextMark = "0";
@@ -41,6 +31,28 @@ for(let i = 0; i < 3; i++) {
     }
 }
 displayBoard(board);
+
+// calls getPosition() and markPosition() until a position is marked.
+function playTurn(mark) {
+    displayBoard(board);
+    let notMarked = true;
+    while (notMarked) {
+        // position tells where the player wants to play.
+        let position;
+        // Choose the player by checking the nextMark
+        if (nextMark == "X") {
+            position = getPosition(player1);
+        } else {
+            position = getPosition(player2);
+        }
+        console.log("You chose position: " + position);
+        notMarked = !markPosition(position, mark);
+        if(notMarked) {
+            console.log("The position " + position +
+             " is not available. Try again.");
+        }
+    }
+}
 
 // Prints the tic-tac-toe board to the screen.
 function displayBoard(board) {
