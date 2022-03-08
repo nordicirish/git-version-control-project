@@ -26,7 +26,7 @@ console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 while (gameGoing) {
   playTurn(nextMark);
 
-  if (checkRow(nextMark, board)) {
+  if (checkWinner(nextMark, board)) {
     // if there is one line with three same marks, end the game and declare the winner.
     if (nextMark == "X") {
       console.log("Game Over!" + player1 + " wins!");
@@ -168,7 +168,7 @@ function markPosition(pos, mark) {
 }
 
 // Function checks if there is three same marks in one row, column or diagonal line.
-function checkRow(mark, board) {
+function checkWinner(mark, board) {
   // Checking rows
   for (var i = 0; i < 3; i++) {
     if (
