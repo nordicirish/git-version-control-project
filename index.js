@@ -14,13 +14,16 @@ var board = [
   [" ", " ", " "],
 ];
 
+// This variable remains "true" as long as game is not over.
+var gameGoing = true;
+
 //These can be used, if we want to ask the names for the players.
 //player1 = readlineSync.question("Give the name for player 1: ");
 //player2 = readlineSync.question("Give the name for player 2: ");
 
 console.log(player1 + " and " + player2 + ", welcome to play tic-tac-toe!");
 
-for (let i = 0; i < 3; i++) {
+while (gameGoing) {
   playTurn(nextMark);
 
   if (checkRow(nextMark, board)) {
@@ -30,13 +33,20 @@ for (let i = 0; i < 3; i++) {
     } else {
       console.log("Game Over!" + player2 + " wins!");
     }
-    i = 3; // to leave the loop if game ends before it.
+    gameGoing = false; // to leave the loop if game ends before it.
   } else {
-    // If the game has not ended yet, change the turn by changing the nextMark
-    if (nextMark == "X") {
-      nextMark = "0";
+    if (isBoardFull) {
+      // If the board is full, the game automatically ends.
+      console.log("Game Over! The board is full!");
+      gameGoing = false;
     } else {
-      nextMark = "X";
+      // If the board is not full and the game has not ended yet,
+      // change the turn by changing the nextMark.
+      if (nextMark == "X") {
+        nextMark = "0";
+      } else {
+        nextMark = "X";
+      }
     }
   }
 }
@@ -205,15 +215,15 @@ function checkRow(mark, board) {
 // Otherwise returns true.
 // CAUTION: hasn't been tested.
 function isBoardFull() {
-    // Let's assume the board is full.
-    let returnValue = true;
-    // The board is not full, if any row has an empty element.
-    for (row in board) {
-        for (elem in row) {
-            if (elem == " ") {
-                returnValue = false;
-            }
-        }
+  // Let's assume the board is full.
+  let returnValue = true;
+  // The board is not full, if any row has an empty element.
+  for (row in board) {
+    for (elem in row) {
+      if (elem == " ") {
+        returnValue = false;
+      }
     }
-    return returnValue;
+  }
+  return returnValue;
 }
