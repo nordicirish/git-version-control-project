@@ -10,6 +10,8 @@ A two player tic-tac-toe game app created with node.js.
 
 ## Releases
 
+release/1.3.0 09/03/2022
+
 release/1.2.1 08/03/2022
 
 release/1.2.0 08/03/2022
