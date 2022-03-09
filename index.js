@@ -24,7 +24,7 @@ function playGame() {
   while (gameGoing) {
     playTurn(nextMark, board, player1, player2);
     gameGoing = checkEnd(nextMark, board, player1, player2);
-    if(gameGoing) {
+    if (gameGoing) {
       // change the turn by changing the nextMark.
       nextMark = changeMark(nextMark);
     }
@@ -80,6 +80,7 @@ function playTurn(mark, board, player1, player2) {
     console.log("You chose position: " + position);
     notMarked = !markPosition(position, mark, board);
     if (notMarked) {
+      displayBoard(board);
       console.log("The position " + position + " is not available. Try again.");
     }
   }
