@@ -24,6 +24,17 @@ release/1.0.0 04/03/2022
 
 * Run npm install to get the package.
 
-## Game instructions
+## Game instructions 
 
-Instructions go here...
+* Using node index.js starts the program. 
+
+* Each player tries to get three marks in a row: vertically, horisontally or diagonally. 
+
+* The players have turns to choose a position from a board with 3x3 spaces. 
+
+* The positions chosen by the first player are marked with X and the positions chosen by the second player with 0. 
+
+* If a player get three marks in a row, he/she wins. 
+
+* If the board gets full without either of the player getting a row of three marks, the game is a draw.
+
