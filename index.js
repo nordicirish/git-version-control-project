@@ -86,15 +86,31 @@ function playTurn(mark, board, player1, player2) {
   }
 }
 
-// Prints the tic-tac-toe board to the screen.
+// Prints the playable tic-tac-toe board to the screen,
+// as well as another board that explains which number means each square.
 function displayBoard(board) {
-  console.log(".-----------.");
+  console.log("Game board:            Square numbers:");
+  console.log(".-----------.          .-----------.");
   for (var i = 0; i < 3; i++) {
     console.log(
-      "| " + board[i][0] + " | " + board[i][1] + " | " + board[i][2] + " |"
+      "| " +
+        board[i][0] +
+        " | " +
+        board[i][1] +
+        " | " +
+        board[i][2] +
+        " |" +
+        "          " +
+        "| " +
+        (i * 3 + 1) +
+        " | " +
+        (i * 3 + 2) +
+        " | " +
+        (i * 3 + 3) +
+        " |"
     );
-    if (i < 2) console.log("|---|---|---|");
-    else console.log("`-----------´");
+    if (i < 2) console.log("|---|---|---|          |---|---|---|");
+    else console.log("`-----------´          `-----------´");
   }
 }
 
