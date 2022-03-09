@@ -20,7 +20,9 @@ release/1.0.0 04/03/2022
 
 ## App installation instructions
 
-Instructions go here...
+* The project uses readline-sync (see package.json/package-lock.json). 
+
+* Run npm install to get the package.
 
 ## Game instructions
 
